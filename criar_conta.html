@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registo</title>
+    <link rel="stylesheet" href="criar_conta.css">
+</head>
+<body>
+    <div class="auth-container">
+        <a href="pag_principal.html" class="back-arrow">
+            ← Voltar
+        </a>
+        <div class="auth-box">
+            <h1>Registo</h1>
+            <form id="register-form">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Nome Completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="birthdate" placeholder="Data de nascimento" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="nif" placeholder="Nº de identificação fiscal" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Senha de acesso" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="confirm-password" placeholder="Confirmar senha de acesso" required>
+                </div>
+                <button type="submit" class="btn-register">Criar Conta</button>
+            </form>
+        </div>
+    </div>
+    <script src="criar_conta.js"></script>
+</body>
+</html>

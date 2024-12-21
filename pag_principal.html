@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autenticação</title>
+    <link rel="stylesheet" href="pag_principal.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-background">
+            <img src="background_mas.jpg" alt="Background" class="background-image">
+        </div>
+        <div class="auth-box">
+            <h1>Autenticação</h1>
+            <form>
+                <div class="form-group">
+                    <label for="nif"><i class="icon-user"></i> Nº de contribuinte</label>
+                    <input type="text" id="nif" placeholder="Digite o NIF">
+                </div>
+                <div class="form-group">
+                    <label for="password"><i class="icon-lock"></i> Senha de acesso</label>
+                    <input type="password" id="password" placeholder="Digite sua senha">
+                </div>
+                <a href="suporte.html" class="forgot-password">Esqueceu-se da sua senha de acesso?</a>
+                <button type="button" class="btn-authenticate" onclick="window.location.href='indicadores.html'">Autenticar</button>
+                <p class="create-account">Ainda não tem conta? <a href="criar_conta.html">Crie aqui</a>.</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

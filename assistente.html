@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assistente.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <title>Assistente Virtual</title>
+    <style>
+    </style>
+</head>
+<body>
+    <br /><br />
+    <nav class="navbar navbar-expand-lg bg-body-terciary fixed-top">
+        <div class="container-fluid">
+            <!-- Brand Logo -->
+            <a href="dados.html" class="navbar-brand">Carlos Carrilho</a>
+
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Serviços
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="consulta.html">Agendar Consulta</a></li>
+                            <li><a class="dropdown-item" href="assistente.html">Assistente</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="portal.html">Portal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="indicadores.html">Indicadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="farmacia.html">Farmácia Virtual</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Assistente Virtual</h1>
+
+        <div class="options">
+            <p>Escolha um dos problemas comuns ou escreva a sua questão:</p>
+            <select id="problemSelect">
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="problem1">Não consigo agendar uma consulta</option>
+                <option value="problem2">Como posso comprar medicamentos</option>
+                <option value="problem3">Quero alterar uma consulta existente</option>
+                <option value="problem4">Como alterar o meu contacto de emergência</option>
+                <option value="problem5">Qual a importância do acompanhamento de hábitos</option>
+                <option value="other">Outra questão</option>
+            </select>
+        </div>
+
+        <div class="response-box">
+            <p id="responseText"></p>
+        </div>
+
+        <div class="custom-query-box">
+            <textarea id="customQuery" rows="4" placeholder="Escreva a sua pergunta aqui"></textarea>
+            <button class="submit-btn" id="sendQuestion">Enviar Pergunta</button>
+            <p class="processing-message" id="processingMessage">O nosso assistente está a procurar a melhor solução para si, por favor aguarde...</p>
+        </div>
+
+        <br /><br />
+
+        <!-- Adicionando a imagem ajustada -->
+        <img src="img.jpg" style="width: 100%; height: auto; border-radius: 8px;">
+
+        <div class="support-section">
+            <h2>Entre em contacto diretamente com a nossa equipa</h2>
+            <div class="contact-method">
+                <select id="contactOption">
+                    <option value="" disabled selected>Introduza como deseja ser contactado pela nossa equipa</option>
+                    <option value="email">Email</option>
+                    <option value="phone">Telefone</option>
+                </select>
+
+
+            </div>
+            <textarea id="supportQuery" rows="4" placeholder="Escreva a sua questão ou comentário aqui..."></textarea>
+            <button id="submitSupportQuery">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Seleciona os elementos necessários
+        const problemSelect = document.getElementById('problemSelect');
+        const responseBox = document.querySelector('.response-box');
+        const responseText = document.getElementById('responseText');
+        const customQueryBox = document.querySelector('.custom-query-box');
+        const customQuery = document.getElementById('customQuery');
+        const sendQuestionButton = document.getElementById('sendQuestion');
+        const processingMessage = document.getElementById('processingMessage');
+        const submitSupportQuery = document.getElementById('submitSupportQuery');
+        const contactOption = document.getElementById('contactOption');
+        const supportQuery = document.getElementById('supportQuery');
+
+        // Respostas pré-definidas para problemas comuns
+        const predefinedResponses = {
+            problem1: "Se está a ter dificuldades para agendar uma consulta, por favor, verifique se todos os campos foram preenchidos corretamente. Caso o problema persista, pergunte ao nosso assistnente ou entre em contacto com o suporte técnico.",
+            problem2: "Para comprar medicamentos, vá até a seção 'Farmácia Virtual' na barra azul no topo da sua página. Caso precise de ajuda adicional, pergunte ao nosso assistente ou entre em contacto com a com a nossa equipa.",
+            problem3: "Você pode alterar uma consulta agendada em dois locais diferentes, no nosso Portal (a página que encontra após efetuar o seu login), ou ao clicar na secção Serviços-Agendar Consulta, na barra azul no topo da sua página. Caso precise de ajuda adicional, pergunte ao nosso assistente ou entre em contacto com a com a nossa equipa.",
+            problem4: "Você pode alterar o seu contacto de emergência na página que pode ser acedida ao clicar no canto superior esquerdo,aonde está escrito o seu nome, seguidamente apenas terá que clicar no botão editar dados e fazer as alterações desejadas. Caso precise de ajuda adicional, pergunte ao nosso assistente ou entre em contacto com a com a nossa equipa.",
+            problem5: "Ao adicionar os seus hábitos, você estará a dar ferramentas aos profissionais de saúde para o ajudar de forma mais rápida e eficaz."
+        };
+
+        // Event Listener para as opções de problema
+        problemSelect.addEventListener('change', () => {
+            const selectedValue = problemSelect.value;
+            if (predefinedResponses[selectedValue]) {
+                // Exibe a resposta pré-definida
+                responseBox.style.display = 'block';
+                responseText.innerText = predefinedResponses[selectedValue];
+                customQueryBox.style.display = 'none';
+            } else if (selectedValue === 'other') {
+                // Exibe a caixa de texto para perguntas personalizadas
+                responseBox.style.display = 'none';
+                customQueryBox.style.display = 'block';
+            }
+        });
+
+        // Event Listener para enviar pergunta personalizada
+        sendQuestionButton.addEventListener('click', () => {
+            const userQuery = customQuery.value.trim();
+            if (userQuery) {
+                processingMessage.style.display = 'block'; // Exibe a mensagem de processamento
+                setTimeout(() => {
+                    processingMessage.style.display = 'none'; // Esconde a mensagem após algum tempo
+                    alert(`Sua pergunta foi enviada: "${userQuery}". Nossa equipa responderá em breve.`);
+                    customQuery.value = ""; // Limpa o campo de texto
+                }, 2000); // Simulação do tempo de processamento
+            } else {
+                alert("Por favor, escreva a sua pergunta antes de enviar.");
+            }
+        });
+
+        // Event Listener para enviar questão ao suporte
+        submitSupportQuery.addEventListener('click', () => {
+            const supportType = contactOption.value;
+            const supportQueryText = supportQuery.value.trim();
+            if (supportQueryText) {
+                alert(`Sua questão foi enviada ao suporte (${supportType}): "${supportQueryText}". Nossa equipa responderá em breve.`);
+                supportQuery.value = ""; // Limpa o campo de texto
+            } else {
+                alert("Por favor, escreva a sua questão antes de enviar.");
+            }
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="consulta.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-content {
+            padding-top: 80px;
+            text-align: center;
+        }
+
+        .confirmation-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 600px;
+            margin: 2rem auto;
+            transition: all 0.3s ease;
+        }
+
+            .confirmation-card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .confirmation-card h2 {
+                font-size: 1.8rem;
+                color: #495057;
+                margin-bottom: 1.5rem;
+            }
+
+            .confirmation-card p {
+                font-size: 1.1rem;
+                color: #555;
+                line-height: 1.6;
+            }
+
+        .btn-container {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .btn-confirm, .btn-cancel, .btn-alter {
+            padding: 0.7rem 1.8rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-confirm {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+
+            .btn-confirm:hover {
+                background-color: #218838;
+            }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+
+            .btn-cancel:hover {
+                background-color: #c82333;
+            }
+
+        .btn-alter {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+            .btn-alter:hover {
+                background-color: #0056b3;
+            }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+        }
+
+        .text-success {
+            font-size: 1.1rem;
+            color: #28a745;
+        }
+    </style>
+    <title>Confirmação de Pagamento</title>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dados.html">Carlos Carrilho</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Serviços
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="consulta.html">Agendar Consulta</a></li>
+                            <li><a class="dropdown-item" href="assistente.html">Assistente</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="portal.html">Portal</a></li>
+                    <li class="nav-item"><a class="nav-link" href="indicadores.html">Indicadores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="farmacia.html">Farmácia Virtual</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="confirmation-card">
+            <h2>Confirmação de Pagamento</h2>
+            <p id="payment-method-text"><strong>Cartão de Crédito:</strong> **** **** **** 1234</p>
+
+            <div class="btn-container">
+                <button id="btn-alter" class="btn-alter">Alterar Método de Pagamento</button>
+                <button id="btn-confirm" class="btn-confirm">Confirmar</button>
+                <button id="btn-cancel" class="btn-cancel">Cancelar</button>
+            </div>
+
+            <div id="payment-method-form" style="display: none;">
+                <label for="new-card-number" class="mt-3">Número do Cartão:</label>
+                <input type="text" id="new-card-number" class="form-control" placeholder="Ex: **** **** **** 1234">
+                <div id="card-number-error" class="error-message"></div>
+
+                <label for="new-card-name" class="mt-3">Nome no Cartão:</label>
+                <input type="text" id="new-card-name" class="form-control" placeholder="Ex: João Silva">
+
+                <label for="new-card-expiration" class="mt-3">Expiração:</label>
+                <input type="text" id="new-card-expiration" class="form-control" placeholder="Ex: 12/25">
+                <div id="expiration-error" class="error-message"></div>
+
+                <div class="btn-container mt-3">
+                    <button id="btn-save" class="btn-confirm">Salvar</button>
+                    <button id="btn-cancel-form" class="btn-cancel">Limpar</button>
+                </div>
+            </div>
+
+            <p id="payment-success-message" class="text-success" style="display: none;">Pagamento processado com sucesso! Aguarde enquanto o redirecionamos para o nosso Portal</p>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const storedPaymentMethod = localStorage.getItem('paymentMethod');
+
+            if (storedPaymentMethod) {
+                const paymentData = JSON.parse(storedPaymentMethod);
+                const paymentMethodText = document.getElementById('payment-method-text');
+                paymentMethodText.innerHTML = `
+                                                <strong>${paymentData.type}:</strong> ${paymentData.number}
+                                                <br><strong>Nome no cartão:</strong> ${paymentData.name}
+                                                <br><strong>Expiração:</strong> ${paymentData.expiration}
+                                            `;
+            }
+        });
+
+        const btnAlter = document.getElementById('btn-alter');
+        const btnSave = document.getElementById('btn-save');
+        const btnCancelForm = document.getElementById('btn-cancel-form');
+        const paymentForm = document.getElementById('payment-method-form');
+        const btnConfirm = document.getElementById('btn-confirm');
+        const btnCancel = document.getElementById('btn-cancel');
+        const cardNumberInput = document.getElementById('new-card-number');
+        const cardNameInput = document.getElementById('new-card-name');
+        const cardExpirationInput = document.getElementById('new-card-expiration');
+        const cardNumberError = document.getElementById('card-number-error');
+        const expirationError = document.getElementById('expiration-error');
+
+        btnAlter.addEventListener('click', function () {
+            paymentForm.style.display = 'block';
+        });
+
+        btnSave.addEventListener('click', function () {
+            const newCardNumber = cardNumberInput.value;
+            const newCardName = cardNameInput.value;
+            const newCardExpiration = cardExpirationInput.value;
+
+            let valid = true;
+
+            if (!validateCardNumber(newCardNumber)) {
+                valid = false;
+                cardNumberError.textContent = 'Número do cartão inválido. Por favor, siga o formato **** **** **** 1234.';
+            } else {
+                cardNumberError.textContent = '';
+            }
+
+            if (!validateExpirationDate(newCardExpiration)) {
+                valid = false;
+                expirationError.textContent = 'Expiração inválida. Por favor, siga o formato MM/YY.';
+            } else {
+                expirationError.textContent = '';
+            }
+
+            if (valid) {
+                const newPaymentData = {
+                    type: 'Cartão de Crédito',
+                    name: newCardName,
+                    number: newCardNumber,
+                    expiration: newCardExpiration
+                };
+
+                localStorage.setItem('paymentMethod', JSON.stringify(newPaymentData));
+
+                const paymentMethodText = document.getElementById('payment-method-text');
+                paymentMethodText.innerHTML = `
+                                                <strong>${newPaymentData.type}:</strong> ${newPaymentData.number}
+                                                <br><strong>Nome no cartão:</strong> ${newPaymentData.name}
+                                                <br><strong>Expiração:</strong> ${newPaymentData.expiration}
+                                            `;
+
+                paymentForm.style.display = 'none';
+            }
+        });
+
+        btnCancelForm.addEventListener('click', function () {
+            cardNumberInput.value = '';
+            cardNameInput.value = '';
+            cardExpirationInput.value = '';
+            cardNumberError.textContent = '';
+            expirationError.textContent = '';
+        });
+
+        btnCancel.addEventListener('click', function () {
+            window.location.href = 'farmacia.html';
+        });
+
+        btnConfirm.addEventListener('click', function () {
+            paymentForm.style.display = 'none';
+            document.getElementById('payment-success-message').style.display = 'block';
+
+            setTimeout(function () {
+                window.location.href = 'portal.html';
+            }, 3000);
+        });
+
+        function validateCardNumber(cardNumber) {
+            return /^[0-9]{4}(?: [0-9]{4}){3}$/.test(cardNumber);
+        }
+
+        function validateExpirationDate(expirationDate) {
+            return /^(0[1-9]|1[0-2])\/[0-9]{2}$/.test(expirationDate);
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

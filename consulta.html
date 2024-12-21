@@ -1,0 +1,398 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Reserva de Consulta Médica</title>
+    <link rel="stylesheet" href="consulta.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <style>
+        /* Estilo para a seção de consultas agendadas */
+        .scheduled-appointments {
+            margin: 2rem auto;
+            padding: 1.5rem;
+            max-width: 800px;
+            background-color: #f8f9fa; /* Combina com o tema Bootstrap */
+            border: 1px solid #ced4da;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+            .scheduled-appointments h2 {
+                color: #183d60; /* Azul consistente com os botões */
+                text-align: center;
+                margin-bottom: 1.5rem;
+                font-size: calc(1.5rem + 0.5vw);
+                font-weight: 600;
+            }
+
+        .appointments-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .appointment-item {
+            display: flex;
+            flex-wrap: wrap; /* Permite que o conteúdo quebre em múltiplas linhas */
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px; /* Espaçamento entre os elementos */
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            background-color: white;
+            border: 1px solid #ced4da;
+            border-radius: 0.5rem;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            word-break: break-word; /* Quebra palavras longas automaticamente */
+        }
+
+            .appointment-item:hover {
+                background-color: #e9ecef;
+                transform: scale(1.02);
+            }
+
+            .appointment-item button {
+                flex-shrink: 0; /* Evita que o botão encolha */
+            }
+
+        .btn-cancel {
+            padding: 0.3rem 0.6rem; /* Tamanho do botão */
+            font-size: 0.8rem; /* Tamanho da fonte */
+            color: white;
+            background-color: #dc3545; /* Vermelho padrão do Bootstrap */
+            border: none;
+            border-radius: 0.25rem; /* Bordas arredondadas */
+            cursor: pointer;
+            width: auto; /* Ajusta a largura ao conteúdo */
+            min-width: 80px; /* Define uma largura mínima */
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+            .btn-cancel:hover {
+                background-color: #c82333; /* Vermelho mais escuro no hover */
+                transform: scale(1.1); /* Pequeno destaque no hover */
+            }
+
+        .container {
+            margin-top: 80px; /* Ajusta para o espaçamento após a barra de navegação */
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg bg-body-terciary fixed-top">
+        <div class="container-fluid">
+            <!-- Brand Logo -->
+            <a href="#" class="navbar-brand">Carlos Carrilho</a>
+
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Serviços
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="consulta.html">Agendar Consulta</a></li>
+                            <li><a class="dropdown-item" href="assistente.html">Assistente</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="portal.html">Portal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tocha.html">Indicadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="estadios.html">Farmácia Virtual</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <h1>Reserva de Consulta Médica</h1>
+        <form id="appointmentForm" novalidate>
+            <label for="specialty">Especialidade:</label>
+            <select id="specialty" name="specialty" required>
+                <option value="">Selecione a especialidade</option>
+                <option value="cardiologia">Cardiologia</option>
+                <option value="dermatologia">Dermatologia</option>
+                <option value="pediatria">Pediatria</option>
+                <option value="ortopedia">Ortopedia</option>
+                <option value="neurologia">Neurologia</option>
+            </select>
+
+            <label for="region">Região:</label>
+            <select id="region" name="region" required>
+                <option value="">Selecione a região</option>
+                <option value="norte">Norte</option>
+                <option value="centro">Centro</option>
+                <option value="lisboa">Lisboa e Vale do Tejo</option>
+                <option value="alentejo">Alentejo</option>
+                <option value="algarve">Algarve</option>
+            </select>
+
+            <label for="hospital">Hospital Público:</label>
+            <select id="hospital" name="hospital" required>
+                <option value="">Selecione um hospital público</option>
+            </select>
+
+            <label for="waitTime">Tempo de Espera Estimado:</label>
+            <input type="text" id="waitTime" name="waitTime" disabled placeholder="Selecione a especialidade e o hospital">
+
+            <label for="date">Data da Consulta:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="comments">Comentários:</label>
+            <textarea id="comments" name="comments" rows="4" placeholder="Adicione comentários adicionais"></textarea>
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn btn btn-primary">Reservar Consulta</button>
+                <button type="button" class="reset-btn btn btn-secondary" id="resetButton">Limpar</button>
+            </div>
+        </form>
+
+        <div class="scheduled-appointments">
+            <h2>Consultas Agendadas:</h2>
+            <ul id="appointmentsList" class="appointments-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const regionElement = document.getElementById('region');
+            const hospitalElement = document.getElementById('hospital');
+            const specialtyElement = document.getElementById('specialty');
+            const waitTimeElement = document.getElementById('waitTime');
+            const dateElement = document.getElementById('date');
+            const appointmentsList = document.getElementById('appointmentsList');
+            const resetButton = document.getElementById('resetButton');
+
+            // Definir os hospitais por região
+            const hospitalsByRegion = {
+                norte: ["Hospital de Braga", "Hospital de Guimarães", "Hospital de Vila Real"],
+                centro: ["Hospital da Universidade de Coimbra", "Hospital de Aveiro", "Hospital de Leiria"],
+                lisboa: ["Hospital de Santa Maria", "Hospital de São José", "Hospital Amadora-Sintra"],
+                alentejo: ["Hospital de Évora", "Hospital de Beja", "Hospital de Portalegre"],
+                algarve: ["Hospital de Faro", "Hospital de Portimão", "Hospital de Lagos"]
+            };
+
+            const defaultWaitTime = 10; // Tempo de espera padrão caso não esteja definido
+
+            const waitTimes = {
+                cardiologia: {
+                    "Hospital de Braga": 10,
+                    "Hospital de Guimarães": 12,
+                    "Hospital de Vila Real": 15,
+                    "Hospital de Santa Maria": 20,
+                    "Hospital de Évora": 18
+                },
+                dermatologia: {
+                    "Hospital de Braga": 5,
+                    "Hospital de Guimarães": 6,
+                    "Hospital de Vila Real": 8,
+                    "Hospital de Santa Maria": 10,
+                    "Hospital de Évora": 7
+                },
+                pediatria: {
+                    "Hospital de Braga": 7,
+                    "Hospital de Guimarães": 9,
+                    "Hospital de Vila Real": 10,
+                    "Hospital de Santa Maria": 12,
+                    "Hospital de Évora": 11
+                },
+                ortopedia: {
+                    "Hospital de Braga": 12,
+                    "Hospital de Guimarães": 15,
+                    "Hospital de Vila Real": 18,
+                    "Hospital de Santa Maria": 20,
+                    "Hospital de Évora": 25
+                },
+                neurologia: {
+                    "Hospital de Braga": 20,
+                    "Hospital de Guimarães": 22,
+                    "Hospital de Vila Real": 25,
+                    "Hospital de Santa Maria": 30,
+                    "Hospital de Évora": 28
+                }
+            };
+
+            // Atualizar os hospitais ao selecionar uma região
+            regionElement.addEventListener('change', function () {
+                const region = regionElement.value;
+                hospitalElement.innerHTML = '<option value="">Selecione um hospital público</option>';
+
+                if (hospitalsByRegion[region]) {
+                    hospitalsByRegion[region].forEach(hospital => {
+                        const option = document.createElement('option');
+                        option.value = hospital;
+                        option.textContent = hospital;
+                        hospitalElement.appendChild(option);
+                    });
+                }
+
+                // Resetar o tempo de espera e data mínima
+                waitTimeElement.value = "Selecione a especialidade e o hospital";
+                dateElement.min = "";
+            });
+
+            function updateWaitTime() {
+                const specialty = specialtyElement.value;
+                const hospital = hospitalElement.value;
+
+                if (specialty && hospital) {
+                    const waitDays = (waitTimes[specialty] && waitTimes[specialty][hospital]) || defaultWaitTime;
+                    waitTimeElement.value = `${waitDays} dias`;
+                    const today = new Date();
+                    const minDate = new Date();
+                    minDate.setDate(today.getDate() + waitDays);
+                    dateElement.min = minDate.toISOString().split('T')[0];
+                } else {
+                    waitTimeElement.value = "Selecione a especialidade e o hospital";
+                    dateElement.min = "";
+                }
+            }
+
+            specialtyElement.addEventListener('change', updateWaitTime);
+            hospitalElement.addEventListener('change', updateWaitTime);
+
+            resetButton.addEventListener('click', function () {
+                document.getElementById('appointmentForm').reset();
+                hospitalElement.innerHTML = '<option value="">Selecione um hospital público</option>';
+                waitTimeElement.value = "Selecione a especialidade e o hospital";
+                dateElement.min = "";
+
+                // Reativar os eventos de mudança
+                specialtyElement.addEventListener('change', updateWaitTime);
+                hospitalElement.addEventListener('change', updateWaitTime);
+            });
+
+            // Recupera as consultas armazenadas localmente ao carregar a página
+            const savedAppointments = localStorage.getItem('appointments');
+            let appointments = savedAppointments ? JSON.parse(savedAppointments) : [];
+
+            // Atualiza a lista de consultas ao carregar
+            function renderAppointments() {
+                appointmentsList.innerHTML = ''; // Limpa a lista
+                appointments.forEach(appointment => {
+                    const li = document.createElement('li');
+                    li.className = 'appointment-item';
+                    li.innerHTML = `
+                                Especialidade: ${appointment.specialty} -
+                                Data: ${appointment.date} -
+                                Hospital: ${appointment.hospital}
+                                <button class="btn-cancel" data-specialty="${appointment.specialty}" data-date="${appointment.date}" data-hospital="${appointment.hospital}">Cancelar</button>
+                            `;
+                    appointmentsList.appendChild(li);
+                });
+            }
+
+            renderAppointments();
+
+            // Função para adicionar uma nova consulta
+            function addAppointment(appointment) {
+                appointments.push(appointment);
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                renderAppointments();
+            }
+
+            // Função para cancelar consultas individuais
+            function cancelAppointment(specialty, date, hospital) {
+                appointments = appointments.filter(app =>
+                    app.specialty !== specialty || app.date !== date || app.hospital !== hospital
+                );
+                localStorage.setItem('appointments', JSON.stringify(appointments));
+                renderAppointments();
+            }
+
+            // Evento para cancelar consultas ao clicar no botão
+            appointmentsList.addEventListener('click', function (event) {
+                if (event.target.classList.contains('btn-cancel')) {
+                    const specialty = event.target.getAttribute('data-specialty');
+                    const date = event.target.getAttribute('data-date');
+                    const hospital = event.target.getAttribute('data-hospital');
+                    cancelAppointment(specialty, date, hospital);
+                }
+            });
+
+            // Validação do formulário
+            const form = document.getElementById('appointmentForm');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                const specialty = specialtyElement.value.trim();
+                const date = dateElement.value.trim();
+                const hospital = hospitalElement.value.trim();
+
+                if (!specialty || !date || !hospital) {
+                    alert('Por favor, preencha todos os campos!');
+                    return;
+                }
+
+                const minDate = new Date(dateElement.min);
+                const selectedDate = new Date(date);
+
+                if (selectedDate < minDate) {
+                    alert('A data selecionada é anterior ao tempo de espera estimado. Por favor, escolha uma data válida.');
+                    return;
+                }
+
+                addAppointment({ specialty, date, hospital });
+                form.reset();
+                hospitalElement.innerHTML = '<option value="">Selecione um hospital público</option>';
+                waitTimeElement.value = "Selecione a especialidade e o hospital";
+                dateElement.min = "";
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

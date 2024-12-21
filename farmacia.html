@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Farmácia Online - Catálogo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .card:hover {
+                transform: scale(1.03);
+            }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .card img {
+            height: 150px;
+            object-fit: contain;
+            margin: 10px auto;
+        }
+
+        .input-group {
+            max-width: 120px;
+            margin: 0 auto;
+        }
+
+        .bottom-bar {
+            background-color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-encomendar {
+            background-color: #28a745;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-encomendar:hover {
+                background-color: #218838;
+            }
+
+        .alert-message {
+            display: none;
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 10px;
+            margin-top: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .navbar {
+            background-color: #3878a3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar-brand {
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: #480a07;
+            }
+        .assistant-section {
+            background-color: #3878a3;
+            color: white;
+            padding: 50px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 60px;
+        }
+
+            .assistant-section h1 {
+                font-size: 24px;
+                margin-bottom: 10px;
+                color: #fff;
+            }
+
+        .assistant-description {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #ecf0f1;
+            line-height: 1.6;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+            .search-bar input[type="text"] {
+                padding: 10px 15px;
+                font-size: 16px;
+                border-radius: 4px;
+                border: none;
+                width: 300px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+        .btn-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+            .btn-link:hover {
+                background-color: #c0392b;
+            }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-terciary fixed-top">
+        <div class="container-fluid">
+            <!-- Brand Logo -->
+            <a href="dados.html" class="navbar-brand">Carlos Carrilho</a>
+
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Serviços
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="consulta.html">Agendar Consulta</a></li>
+                            <li><a class="dropdown-item" href="assistente.html">Assistente</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="portal.html">Portal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="indicadores.html">Indicadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="farmacia.html">Farmácia Virtual</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br /><br />
+    <!-- Seção Total e Encomenda -->
+    <!-- Título -->
+    <div class="container text-center">
+        <h1>Catálogo de Medicamentos</h1>
+        <p class="text-muted">Selecione os produtos que deseja encomendar</p>
+    </div>
+
+    <div class="container bottom-bar d-flex justify-content-between align-items-center">
+        <h4>Total: <span id="total">0,00€</span></h4>
+        <a href="pagamento.html" class="btn-link">Encomendar</a>
+    </div>
+
+
+    <!-- Seção Principal -->
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- Produto 1 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/aloe.webp alt="Vicks Sinex Aloe">
+                    <div class="card-body">
+                        <h5 class="card-title">Vicks Sinex Aloe</h5>
+                        <p class="card-text text-muted">Preço: 9,55€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="9.55" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 2 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/strepfen.jpg alt="Strepfen Mel e Limão">
+                    <div class="card-body">
+                        <h5 class="card-title">Strepfen Mel e Limão</h5>
+                        <p class="card-text text-muted">Preço: 10,95€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="10.95" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 3 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/benuron.jpg alt="Paracetamol 500mg">
+                    <div class="card-body">
+                        <h5 class="card-title">Ben-u-ron 500mg</h5>
+                        <p class="card-text text-muted">Preço: 3,50€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="3.50" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 4 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/daktarin.jpg alt="Daktarin">
+                    <div class="card-body">
+                        <h5 class="card-title">Daktarin</h5>
+                        <p class="card-text text-muted">Preço: 9,95€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="9.95" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 5 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/ibuprofeno.jpg alt="Ibuprofeno 400mg">
+                    <div class="card-body">
+                        <h5 class="card-title">Ibuprofeno 200mg</h5>
+                        <p class="card-text text-muted">Preço: 4,20€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="4.20" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 6 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/voltaren.jpg alt="Voltaren">
+                    <div class="card-body">
+                        <h5 class="card-title">Voltaren</h5>
+                        <p class="card-text text-muted">Preço: 11,90€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="11.90" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 7 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/aspirina.png alt="Aspirina C">
+                    <div class="card-body">
+                        <h5 class="card-title">Aspirina C</h5>
+                        <p class="card-text text-muted">Preço: 7,75€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="7.75" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 8 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/nurofen.jpg alt="Nurofen 200mg">
+                    <div class="card-body">
+                        <h5 class="card-title">Nurofen 400mg</h5>
+                        <p class="card-text text-muted">Preço: 5,60€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="5.60" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Produto 9 -->
+            <div class="col">
+                <div class="card text-center">
+                    <img src=Images/mentocaína.jpg alt="Omeprazol 20mg">
+                    <div class="card-body">
+                        <h5 class="card-title">Mentocaína</h5>
+                        <p class="card-text text-muted">Preço: 8,15€</p>
+                        <div class="input-group">
+                            <button class="btn btn-outline-primary decrement" type="button">-</button>
+                            <input type="number" class="form-control text-center" value="0" min="0" data-preco="8.15" readonly>
+                            <button class="btn btn-outline-primary increment" type="button">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="assistant-section">
+        <h1>Pergunte ao nosso assistente</h1>
+        <p class="assistant-description">Precisa de ajuda? O nosso assistente está pronto para responder às suas perguntas e facilitar a sua experiência.</p>
+        <a href="assistente.html" class="btn-link">Perguntar</a>
+    </section>
+    <script>
+    <!-- Script -->
+    const inputs = document.querySelectorAll('.form-control');
+    const totalElement = document.getElementById('total');
+    const encomendarBtn = document.querySelector('.btn-link');
+
+    function updateTotal() {
+    let total = 0;
+    inputs.forEach(input => {
+    const quantidade = parseInt(input.value);
+    const preco = parseFloat(input.dataset.preco);
+    if (!isNaN(quantidade)) {
+    total += quantidade * preco;
+    }
+    });
+    totalElement.innerText = total.toFixed(2) + '€';
+    }
+
+    document.querySelectorAll('.increment').forEach(button => {
+    button.addEventListener('click', function () {
+    const input = this.parentElement.querySelector('input');
+    input.value = parseInt(input.value) + 1;
+    updateTotal();
+    });
+    });
+
+    document.querySelectorAll('.decrement').forEach(button => {
+    button.addEventListener('click', function () {
+    const input = this.parentElement.querySelector('input');
+    if (parseInt(input.value) > 0) {
+    input.value = parseInt(input.value) - 1;
+    updateTotal();
+    }
+    });
+    });
+
+    encomendarBtn.addEventListener('click', function (event) {
+    let totalQuantity = 0;
+    inputs.forEach(input => {
+    totalQuantity += parseInt(input.value);
+    });
+
+    if (totalQuantity === 0) {
+    event.preventDefault(); // Prevent navigation
+    alert("Por favor, selecione pelo menos um produto para encomendar.");
+    }
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
