@@ -59,6 +59,6 @@ document.getElementById('register-form').addEventListener('submit', function (e)
     } else {
         alert('Formulário enviado com sucesso!');
         // Redireciona para a página inicial
-        window.location.href = 'pag_principal.html'; // Substitua pelo nome correto da página
+        window.location.href = 'index.html'; // Substitua pelo nome correto da página
     }
 });
